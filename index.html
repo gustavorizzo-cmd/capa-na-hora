@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#7ec8ff">
+<title>Mini Minecraft 2D</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="game"></canvas>
+
+<div id="menu">
+  <div class="panel">
+    <h1>Mini Minecraft 2D</h1>
+    <p>Quebre e coloque blocos, explore o terreno e salve seu mundo.</p>
+    <button id="playBtn">JOGAR</button>
+    <p style="opacity:.8">No computador: A/D ou setas, Espaço, clique esquerdo e direito.</p>
+  </div>
+</div>
+
+<div id="hud" style="display:none">
+  <div id="topbar">
+    <div class="small" id="info">Bloco: Grama</div>
+    <div>
+      <span class="small" id="saveBtn">Salvar</span>
+      <span class="small" id="loadBtn">Carregar</span>
+    </div>
+  </div>
+  <div id="hotbar"></div>
+</div>
+
+<div id="mobile" style="display:none">
+  <div class="ctrl" id="left">◀</div>
+  <div class="ctrl" id="right">▶</div>
+  <div class="ctrl" id="jump">⬆</div>
+  <div class="ctrl" id="break">QUEBRAR</div>
+  <div class="ctrl" id="place">COLOCAR</div>
+</div>
+
+<div id="msg"></div>
+
+<script src="game.js"></script>
+</body>
+</html>
