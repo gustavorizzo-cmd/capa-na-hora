@@ -2,9 +2,13 @@
 
 Site público: https://horizonte-digital-projeto.gustavo-rizzo.chatgpt.site/
 
-**O código-fonte ainda NÃO está neste diretório.** O handoff de 22/08/2026 diz
-que o pacote de código acompanharia a entrega, mas apenas os dois documentos de
-`docs/` foram recebidos. Quando o código chegar, ele entra aqui.
+**O código-fonte ainda NÃO está neste diretório.** O manifesto do pacote
+(`docs/CONTEUDO_DO_PACOTE.txt`) lista quatro itens; só o item 1 e o arquivo de
+memória chegaram. Faltam as pastas `site-horizonte-digital/` (código completo),
+`memoria-historica/` e `materiais-complementares/`. Quando o código chegar, ele
+entra aqui.
+
+Motivo provável: o anexo desta interface aceita arquivos avulsos, não pastas.
 
 ## Documentos recebidos
 
@@ -12,6 +16,7 @@ que o pacote de código acompanharia a entrega, mas apenas os dois documentos de
 |---|---|---|
 | `docs/HANDOFF-2026-08-22.md` | Entrega de 22/08/2026, estado atual do produto | Prioridade 3 |
 | `docs/MEMORIA-V2-2026-08-03.txt` | Memória consolidada V2, 10.090 linhas | Prioridade 4 — contém decisões antigas |
+| `docs/CONTEUDO_DO_PACOTE.txt` | Manifesto do pacote de 22/08/2026 | Índice do que deveria ter vindo |
 
 Ordem de prioridade em caso de conflito, definida pelo handoff:
 

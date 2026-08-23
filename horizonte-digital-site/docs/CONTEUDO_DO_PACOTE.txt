@@ -1,0 +1,22 @@
+PACOTE PARA EDIÇÃO DO SITE HORIZONTE DIGITAL
+Data: 22/08/2026
+
+1. PROMPT_PARA_CLAUDE_EDITAR_SITE.md
+   Documento principal. O Claude deve ler este arquivo primeiro.
+
+2. site-horizonte-digital/
+   Código-fonte completo da versão atual do site, incluindo páginas, APIs,
+   banco, migrações, imagens, APKs e aplicativo Android. Não inclui node_modules,
+   artefatos de build, dados privados do D1/R2 ou o histórico interno do Git.
+
+3. memoria-historica/
+   Arquivo-mestre V2 criado anteriormente. É referência histórica; decisões
+   atuais e o código-fonte têm prioridade quando houver conflito.
+
+4. materiais-complementares/
+   Capa do YouTube e imagem histórica do antigo conceito de mascote. Os mascotes
+   atuais usados pelo site estão dentro de site-horizonte-digital/public/mascotes/.
+
+Site público de referência:
+https://horizonte-digital-projeto.gustavo-rizzo.chatgpt.site/
+
