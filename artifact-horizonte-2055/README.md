@@ -1,6 +1,6 @@
 # Horizonte Digital 2055 — fonte do site
 
-`index.html` deste diretório é a **fonte editável** do Artifact publicado:
+`index.html` deste diretório (simulação de faturamento, NÃO o site) é a **fonte editável** do Artifact publicado:
 
 - URL: https://claude.ai/code/artifact/91f4d84f-3012-4e71-8fc0-95ce51ec2e38
 - Título: `Horizonte Digital 2055`
