@@ -1,0 +1,924 @@
+<title>Horizonte Digital 2055</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400&display=swap">
+
+<style>
+:root{
+  --ground:#f2f2f5;
+  --card:#ffffff;
+  --card-2:#f7f7fa;
+  --ink:#191826;
+  --ink-2:#585670;
+  --ink-3:#8d8aa4;
+  --rule:rgba(25,24,38,.14);
+  --rule-soft:rgba(25,24,38,.07);
+  --grid:rgba(25,24,38,.045);
+  --accent:#4a3aa7;
+  --accent-soft:rgba(74,58,167,.10);
+  --flag:#8a5300;
+  --flag-bg:#fdf3e2;
+  --flag-rule:rgba(138,83,0,.26);
+  --neg:#b04a49;
+  --pos:#2a78d6;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --s5:#e87ba4;
+  --shell:78rem;
+  --r:12px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#131219;
+    --card:#1b1a24;
+    --card-2:#22212d;
+    --ink:#ecebf5;
+    --ink-2:#a4a1bd;
+    --ink-3:#77748f;
+    --rule:rgba(200,196,235,.18);
+    --rule-soft:rgba(200,196,235,.09);
+    --grid:rgba(200,196,235,.05);
+    --accent:#9085e9;
+    --accent-soft:rgba(144,133,233,.14);
+    --flag:#ffc774;
+    --flag-bg:rgba(255,180,84,.09);
+    --flag-rule:rgba(255,180,84,.30);
+    --neg:#e66767;
+    --pos:#3987e5;
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#131219;
+  --card:#1b1a24;
+  --card-2:#22212d;
+  --ink:#ecebf5;
+  --ink-2:#a4a1bd;
+  --ink-3:#77748f;
+  --rule:rgba(200,196,235,.18);
+  --rule-soft:rgba(200,196,235,.09);
+  --grid:rgba(200,196,235,.05);
+  --accent:#9085e9;
+  --accent-soft:rgba(144,133,233,.14);
+  --flag:#ffc774;
+  --flag-bg:rgba(255,180,84,.09);
+  --flag-rule:rgba(255,180,84,.30);
+  --neg:#e66767;
+  --pos:#3987e5;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background-color:var(--ground);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px;
+  color:var(--ink);
+  font-family:"Newsreader",Georgia,serif;
+  font-size:18px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.shell{width:min(100% - 2.4rem,var(--shell));margin-inline:auto}
+h1,h2,h3{font-family:"Bricolage Grotesque","Segoe UI",Arial,sans-serif;margin:0;text-wrap:balance;font-weight:700;letter-spacing:-.015em}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.mono{font-family:"DM Mono",ui-monospace,Consolas,monospace;font-variant-numeric:tabular-nums}
+.num{font-family:"DM Mono",ui-monospace,Consolas,monospace;font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+
+/* ---------- masthead ---------- */
+.mast{padding:3.4rem 0 2.2rem}
+.eyebrow{font-family:"DM Mono",monospace;font-size:.7rem;letter-spacing:.17em;text-transform:uppercase;color:var(--ink-3);margin-bottom:1.1rem}
+.mast h1{font-size:clamp(2.1rem,5.6vw,3.5rem);line-height:1.04;max-width:19ch}
+.mast h1 em{font-style:normal;color:var(--accent)}
+.mast-sub{color:var(--ink-2);max-width:58ch;margin-top:1.1rem;font-size:1.06rem}
+.horizonte{margin:2.4rem 0 1rem;height:1px;background:var(--rule);position:relative}
+.horizonte::after{content:"";position:absolute;left:0;top:0;height:1px;width:34%;background:var(--accent)}
+.mast-fig{display:flex;flex-wrap:wrap;gap:2.6rem 3.4rem;align-items:flex-end}
+.figblock{display:flex;flex-direction:column;gap:.15rem}
+.figblock .cap{font-family:"DM Mono",monospace;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3)}
+.figblock .big{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:clamp(2.2rem,6.4vw,3.6rem);line-height:1;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+.figblock .big.accentnum{color:var(--accent)}
+.figblock .sub{font-family:"DM Mono",monospace;font-size:.78rem;color:var(--ink-2);font-variant-numeric:tabular-nums}
+
+/* ---------- control bar ---------- */
+.controls{position:sticky;top:0;z-index:40;background:var(--ground);border-bottom:1px solid var(--rule);padding:.65rem 0}
+.controls-in{display:flex;flex-wrap:wrap;gap:.7rem 1.6rem;align-items:center}
+.ctl{display:flex;align-items:center;gap:.55rem}
+.ctl > span{font-family:"DM Mono",monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:999px;padding:2px;gap:2px;background:var(--card)}
+.seg button{
+  font-family:"DM Mono",monospace;font-size:.74rem;border:0;cursor:pointer;background:transparent;
+  color:var(--ink-2);padding:.3rem .78rem;border-radius:999px;line-height:1.5;
+}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--card);font-weight:500}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .seg button[aria-pressed="true"]{color:#14131a}}
+:root[data-theme="dark"] .seg button[aria-pressed="true"]{color:#14131a}
+
+/* ---------- sections ---------- */
+section{padding:2.9rem 0}
+.sechead{border-top:1px solid var(--rule);padding-top:.55rem;margin-bottom:1.5rem;display:grid;gap:.45rem}
+.sechead .tag{font-family:"DM Mono",monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.sechead h2{font-size:clamp(1.3rem,3vw,1.7rem)}
+.sechead p{color:var(--ink-2);max-width:66ch;font-size:.99rem}
+
+/* ---------- aviso ---------- */
+.aviso{background:var(--flag-bg);border:1px solid var(--flag-rule);border-radius:var(--r);padding:1.25rem 1.4rem;display:grid;gap:.65rem}
+.aviso h2{font-size:1rem;color:var(--flag);letter-spacing:0}
+.aviso p{color:var(--ink-2);max-width:74ch;font-size:.96rem}
+.aviso strong{color:var(--ink);font-weight:600}
+
+/* ---------- tiles ---------- */
+.tiles{display:grid;gap:.85rem;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.tile{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:1rem 1.1rem;display:grid;gap:.2rem;align-content:start}
+.tile .lab{font-family:"DM Mono",monospace;font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);line-height:1.35;min-height:2.7em}
+.tile .val{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1.6rem;line-height:1.2;letter-spacing:-.025em;font-variant-numeric:tabular-nums}
+.tile .desc{color:var(--ink-2);font-size:.85rem;line-height:1.42}
+.tile.zero .val{color:var(--ink-3)}
+.tile.mark .val{color:var(--accent)}
+
+/* ---------- chart ---------- */
+.card{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:1.3rem 1.3rem 1.1rem}
+.chart-top{display:flex;flex-wrap:wrap;gap:.8rem 1.4rem;align-items:baseline;justify-content:space-between;margin-bottom:1.1rem}
+.chart-title{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1rem}
+.chart-title span{display:block;font-family:"DM Mono",monospace;font-weight:400;color:var(--ink-2);font-size:.75rem;margin-top:.15rem}
+.legend{display:flex;flex-wrap:wrap;gap:.4rem 1rem;margin-bottom:.9rem}
+.legend span{display:inline-flex;align-items:center;gap:.4rem;font-family:"DM Mono",monospace;font-size:.72rem;color:var(--ink-2)}
+.legend i{width:11px;height:11px;border-radius:3px;display:block}
+.plotwrap{position:relative;overflow-x:auto}
+svg.chart{display:block;width:100%;min-width:640px;height:auto}
+.tip{
+  position:absolute;z-index:5;pointer-events:none;opacity:0;transform:translateY(3px);
+  transition:opacity .12s,transform .12s;background:var(--card);border:1px solid var(--rule);
+  border-radius:10px;padding:.6rem .7rem;width:206px;box-shadow:0 12px 34px rgba(12,10,30,.20);
+}
+.tip.on{opacity:1;transform:translateY(0)}
+.tip .ty{font-family:"DM Mono",monospace;font-size:.68rem;letter-spacing:.1em;color:var(--ink-3)}
+.tip .tt{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1.02rem;margin:.05rem 0 .4rem;font-variant-numeric:tabular-nums}
+.tip ul{list-style:none;margin:0;padding:0;display:grid;gap:.16rem}
+.tip li{display:flex;justify-content:space-between;gap:.7rem;font-family:"DM Mono",monospace;font-size:.7rem;color:var(--ink-2);font-variant-numeric:tabular-nums;line-height:1.35}
+.tip li b{font-weight:500;color:var(--ink)}
+.tip li i{width:8px;height:8px;border-radius:2px;display:inline-block;margin-right:.35rem;vertical-align:baseline}
+.foot{color:var(--ink-3);font-family:"DM Mono",monospace;font-size:.73rem;margin-top:.9rem;max-width:80ch;line-height:1.55}
+
+/* ---------- cascata ---------- */
+.casc{display:grid;gap:.5rem}
+.casc-row{display:grid;grid-template-columns:minmax(150px,15rem) 1fr minmax(96px,auto);gap:.9rem;align-items:center}
+.casc-row .n{font-family:"DM Mono",monospace;font-size:.8rem;color:var(--ink-2)}
+.casc-row .track{height:15px;background:var(--card-2);border:1px solid var(--rule-soft);border-radius:4px;overflow:hidden}
+.casc-row .track i{display:block;height:100%;border-radius:3px}
+.casc-row .v{font-family:"DM Mono",monospace;font-size:.8rem;text-align:right;font-variant-numeric:tabular-nums}
+.casc-row.minus .n,.casc-row.minus .v{color:var(--neg)}
+.casc-row.total .n,.casc-row.total .v{color:var(--ink);font-weight:500}
+.casc-row.res .n,.casc-row.res .v{color:var(--accent);font-weight:500}
+@media(max-width:44rem){.casc-row{grid-template-columns:1fr auto;gap:.3rem .8rem}.casc-row .track{grid-column:1/-1}}
+
+/* ---------- tables ---------- */
+.tscroll{overflow:auto;max-height:none;border:1px solid var(--rule);border-radius:var(--r);background:var(--card)}
+.tscroll.tall{max-height:32rem}
+table{border-collapse:collapse;width:100%;min-width:720px;font-variant-numeric:tabular-nums}
+th,td{padding:.5rem .8rem;text-align:right;border-bottom:1px solid var(--rule-soft);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+thead th{
+  position:sticky;top:0;z-index:2;background:var(--card-2);
+  font-family:"DM Mono",monospace;font-size:.64rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:400;
+}
+thead th::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--rule)}
+tbody td{font-family:"DM Mono",monospace;font-size:.79rem;color:var(--ink-2)}
+tbody td:first-child{color:var(--ink);font-weight:500}
+tbody td.tot{color:var(--ink);font-weight:500}
+tbody td.pos{color:var(--ink)}
+tbody td.negv{color:var(--neg)}
+tbody tr:hover td{background:var(--card-2)}
+tbody td:first-child::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:transparent;margin-right:.5rem;vertical-align:middle}
+tbody tr.era td:first-child::before{background:var(--accent)}
+tfoot td{font-family:"DM Mono",monospace;font-size:.79rem;font-weight:500;color:var(--ink);background:var(--card-2);border-top:2px solid var(--rule);position:sticky;bottom:0}
+
+/* ---------- divisões ---------- */
+.divs{display:grid;gap:.7rem}
+.divrow{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:1rem 1.15rem;display:grid;gap:.5rem}
+.divhead{display:flex;flex-wrap:wrap;gap:.4rem 1rem;align-items:baseline;justify-content:space-between}
+.divname{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1rem;display:flex;align-items:center;gap:.5rem}
+.divname i{width:10px;height:10px;border-radius:3px;display:block;flex:none}
+.divname small{display:block;font-family:"DM Mono",monospace;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:400;margin-top:.1rem}
+.divnum{font-family:"DM Mono",monospace;font-size:.88rem;font-variant-numeric:tabular-nums}
+.divnum em{font-style:normal;color:var(--ink-3);font-size:.75rem;margin-left:.45rem}
+.meter{height:7px;border-radius:999px;background:var(--card-2);overflow:hidden;border:1px solid var(--rule-soft)}
+.meter i{display:block;height:100%;border-radius:999px}
+.divrow p{color:var(--ink-2);font-size:.92rem;max-width:74ch}
+
+/* ---------- tornado ---------- */
+.torn{display:grid;gap:.42rem}
+.torn-row{display:grid;grid-template-columns:minmax(140px,14rem) 1fr;gap:.9rem;align-items:center}
+.torn-row .n{font-family:"DM Mono",monospace;font-size:.79rem;color:var(--ink-2)}
+.torn-bar{position:relative;height:19px}
+.torn-bar .mid{position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--rule)}
+.torn-bar i{position:absolute;top:2px;bottom:2px;border-radius:3px}
+.torn-bar b{position:absolute;top:0;font-family:"DM Mono",monospace;font-size:.68rem;font-weight:400;color:var(--ink-3);line-height:19px;font-variant-numeric:tabular-nums}
+@media(max-width:44rem){.torn-row{grid-template-columns:1fr;gap:.15rem}}
+
+/* ---------- cenários ---------- */
+.scen{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+.scen-card{border:1px solid var(--rule);border-radius:var(--r);padding:1.05rem 1.15rem;background:var(--card);display:grid;gap:.42rem;align-content:start}
+.scen-card.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.scen-card .tag{font-family:"DM Mono",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.scen-card.on .tag{color:var(--accent)}
+.scen-card .big{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1.5rem;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.scen-card p{color:var(--ink-2);font-size:.88rem}
+
+/* ---------- fórmulas ---------- */
+.forms{display:grid;gap:.65rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.form{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:.95rem 1.05rem;display:grid;gap:.4rem;align-content:start}
+.form h3{font-size:.9rem;display:flex;align-items:center;gap:.45rem}
+.form h3 i{width:9px;height:9px;border-radius:3px;display:block;flex:none}
+.form code{
+  font-family:"DM Mono",monospace;font-size:.73rem;color:var(--ink);background:var(--card-2);
+  border:1px solid var(--rule-soft);border-radius:7px;padding:.5rem .6rem;display:block;line-height:1.6;
+  overflow-x:auto;white-space:pre-wrap;word-break:break-word;
+}
+.form p{color:var(--ink-2);font-size:.86rem}
+
+/* ---------- premissas ---------- */
+.prem{display:grid;gap:.75rem;padding:0;margin:0;list-style:none}
+.prem li{display:grid;grid-template-columns:auto 1fr;gap:.85rem;align-items:start;border-bottom:1px solid var(--rule-soft);padding-bottom:.75rem}
+.prem li:last-child{border-bottom:0}
+.prem .mk{font-family:"DM Mono",monospace;font-size:.68rem;color:var(--accent);padding-top:.32rem;letter-spacing:.06em}
+.prem b{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:.98rem}
+.prem span{color:var(--ink-2);display:block;font-size:.94rem}
+.prem em{font-style:italic}
+
+footer{padding:2rem 0 3.2rem;color:var(--ink-3);font-family:"DM Mono",monospace;font-size:.74rem;display:grid;gap:.3rem;line-height:1.6}
+footer .rule{height:1px;background:var(--rule);margin-bottom:1.4rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="mast shell">
+  <p class="eyebrow">Projeção 2026 – 2055 · modelo v2 · trinta exercícios de planejamento</p>
+  <h1>Quanto a Horizonte Digital <em>poderia</em> faturar em 30 anos</h1>
+  <p class="mast-sub">A primeira versão desta página tinha dez anos e números redondos, digitados um a um. Esta tem trinta anos e nenhum número digitado: tudo aqui é calculado a partir de unidades vendidas, assinantes, preços e RPM — que continuam sendo imaginados, mas agora podem ser discutidos um por um.</p>
+  <div class="horizonte"></div>
+  <div class="mast-fig">
+    <div class="figblock">
+      <span class="cap">Receita da empresa · 30 anos · <span id="cenLabel">cenário base</span></span>
+      <span class="big accentnum num" id="heroTotal">—</span>
+      <span class="sub" id="heroReal">—</span>
+    </div>
+    <div class="figblock">
+      <span class="cap">Receita real acumulada até hoje</span>
+      <span class="big num" style="color:var(--ink-3)">R$ 0</span>
+      <span class="sub">Nenhum projeto lançado. Este é o único número certo da página.</span>
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="shell controls-in">
+    <div class="ctl">
+      <span>Cenário</span>
+      <div class="seg" role="group" aria-label="Cenário">
+        <button type="button" data-cen="cauteloso" aria-pressed="false">Cauteloso</button>
+        <button type="button" data-cen="base" aria-pressed="true">Base</button>
+        <button type="button" data-cen="otimista" aria-pressed="false">Otimista</button>
+      </div>
+    </div>
+    <div class="ctl">
+      <span>Moeda</span>
+      <div class="seg" role="group" aria-label="Moeda">
+        <button type="button" data-moeda="nom" aria-pressed="true">Reais correntes</button>
+        <button type="button" data-moeda="real" aria-pressed="false">Reais de 2026</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="shell">
+
+  <section style="padding-top:2.2rem">
+    <div class="aviso">
+      <h2>Leia isto antes de qualquer número</h2>
+      <p><strong>Nada aqui é previsão.</strong> Não existe jogo publicado, canal monetizado, assinante ou venda registrada que sirva de base. O que mudou da versão anterior não foi a certeza — foi o método: em vez de escrever “R$ 1.400.000 em 2033”, o modelo escreve “3 títulos × 9.000 cópias × R$ 30, menos 30% de loja” e deixa a multiplicação decidir.</p>
+      <p>Isso torna a página <strong>auditável, não verdadeira</strong>. O ganho é poder discordar de um número específico — “14.000 cópias por título é muito” — em vez de discordar de um total inteiro. Os três cenários mudam os mesmos drivers por multiplicadores; a tabela e o gráfico recalculam na hora.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <span class="tag">Painel</span>
+      <h2>Seis números que resumem a simulação</h2>
+      <p>Todos recalculam quando você troca o cenário ou a moeda na barra acima.</p>
+    </div>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <span class="tag">Curva</span>
+      <h2>Trinta anos não sobem em linha reta — sobem em dentes</h2>
+      <p>Cada pico é um lançamento da franquia AeroWorld; cada queda é o ano seguinte, vivendo da cauda. Estúdios que dependem de um título grande têm exatamente esse formato, e a versão anterior desta página escondia isso ao usar valores redondos e crescentes.</p>
+    </div>
+    <div class="card">
+      <div class="chart-top">
+        <div class="chart-title">Receita da empresa por ano <span id="chartSub">empilhada por divisão</span></div>
+        <div class="seg" role="group" aria-label="Janela de anos">
+          <button type="button" data-jan="tudo" aria-pressed="true">2026–2055</button>
+          <button type="button" data-jan="cedo" aria-pressed="false">Zoom 2026–2040</button>
+        </div>
+      </div>
+      <div class="legend" id="legend"></div>
+      <div class="plotwrap">
+        <svg class="chart" id="chart" viewBox="0 0 1000 380" role="img" aria-label="Receita anual empilhada por divisão"></svg>
+        <div class="tip" id="tip" role="status"></div>
+      </div>
+      <p class="foot" id="chartFoot"></p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <span class="tag">Cascata</span>
+      <h2>Receita não é dinheiro no bolso</h2>
+      <p>O que o público gasta e o que sobra para a empresa são coisas muito diferentes. Soma dos 30 anos, no cenário e na moeda selecionados.</p>
+    </div>
+    <div class="card">
+      <div class="casc" id="casc"></div>
+      <p class="foot">Cortes de plataforma: 72% do gasto no Roblox fica com a Roblox (DevEx paga US$ 0,0035 por Robux comprado por ~US$ 0,0125), 30% em Steam, consoles e lojas mobile, 45% do valor do anúncio no YouTube, 6% de gateway nas assinaturas próprias e 12% de distribuição no hardware. Imposto: alíquota efetiva por faixa de faturamento (6% no Simples até R$ 180 mil, subindo até 15,5%, e 14,5% no Lucro Presumido acima de R$ 4,8 milhões). Custo direto por divisão: jogos 45%, audiovisual 62%, IA 38%, canal 30%, hardware 90%. <strong>O custo que falta é o seu próprio tempo</strong> — nos primeiros dez anos ele é o custo principal e não aparece em lugar nenhum desta conta.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <span class="tag">Tabela</span>
+      <h2>Receita por divisão, ano a ano</h2>
+      <p>Trinta linhas. Um traço significa que a frente ainda não existe naquele ano. A última coluna é o resultado operacional — receita menos custo direto, estrutura e impostos.</p>
+    </div>
+    <div class="tscroll tall">
+      <table>
+        <thead><tr>
+          <th scope="col">Ano</th><th scope="col">Games</th><th scope="col">Studios</th>
+          <th scope="col">IA</th><th scope="col">Canal</th><th scope="col">Interactive</th>
+          <th scope="col">Receita</th><th scope="col">Resultado</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+        <tfoot id="tfoot"></tfoot>
+      </table>
+    </div>
+    <p class="foot">Anos marcados com ponto são lançamentos da franquia AeroWorld.</p>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <span class="tag">Divisões</span>
+      <h2>De onde viria o dinheiro</h2>
+      <p>Participação de cada frente na receita dos trinta anos.</p>
+    </div>
+    <div class="divs" id="divs"></div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <span class="tag">Sensibilidade</span>
+      <h2>Qual premissa realmente move o total</h2>
+      <p>Cada barra mostra o efeito sobre a receita de 30 anos de errar aquele driver em 30% para menos ou para mais, mantendo todo o resto igual. É a pergunta mais útil da página: se só desse para acertar uma coisa, qual seria.</p>
+    </div>
+    <div class="card">
+      <div class="torn" id="torn"></div>
+      <p class="foot" id="tornFoot"></p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <span class="tag">Cenários</span>
+      <h2>O mesmo modelo, com sorte diferente</h2>
+      <p>Não são três tabelas escritas à mão: são os mesmos drivers multiplicados. O cauteloso corta unidades e atrasa o AeroWorld em quatro anos; o otimista amplia audiência, assinantes e vendas.</p>
+    </div>
+    <div class="scen" id="scen"></div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <span class="tag">Drivers</span>
+      <h2>Os números que geram todos os outros</h2>
+      <p>Estas são as premissas de verdade. Discordar da página é discordar de alguma célula desta tabela.</p>
+    </div>
+    <div class="tscroll">
+      <table><thead id="dthead"></thead><tbody id="dtbody"></tbody></table>
+    </div>
+    <p class="foot">Valores nos anos-marco; entre eles o modelo interpola linearmente. Preços em reais correntes, subindo perto da inflação de 4% ao ano.</p>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <span class="tag">Contas</span>
+      <h2>Como cada divisão é calculada</h2>
+      <p>Nenhuma receita desta página foi digitada. Todas saem destas cinco linhas.</p>
+    </div>
+    <div class="forms" id="forms"></div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <span class="tag">Premissas</span>
+      <h2>O que precisaria ser verdade</h2>
+      <p>Se alguma destas cair, a tabela inteira muda — e a seção de sensibilidade diz o quanto.</p>
+    </div>
+    <ol class="prem">
+      <li><span class="mk">26–28</span><div><b>Os primeiros três anos rendem troco, e tudo bem.</b><span>O modelo começa com 40 mil visitas no Roblox, 0,8% de jogadores pagantes e 90 Robux por pagante — R$ 544 no primeiro ano. Esses anos pagam aprendizado, não contas.</span></div></li>
+      <li><span class="mk">2029</span><div><b>O primeiro jogo pago sai em 2029.</b><span>Um título, 3.500 cópias, R$ 22, menos 30% de loja. É o ano em que a receita deixa de ser simbólica — e o primeiro em que a soma passa de R$ 100 mil.</span></div></li>
+      <li><span class="mk">2033</span><div><b>A Horizonte Studios entra por licenciamento, não por streaming.</b><span>Oito episódios a R$ 45 mil de licença. Streaming próprio só em 2038, quando já existe catálogo para justificar uma assinatura.</span></div></li>
+      <li><span class="mk">2035</span><div><b>O AeroWorld lança em 2035 e vira franquia.</b><span>45 mil cópias a R$ 89, com sequências em 2040, 2044, 2048 e 2052, cada uma maior. É o driver que mais move o total — e o que mais custa se atrasar.</span></div></li>
+      <li><span class="mk">2038</span><div><b>A Horizonte IA vira assinatura, não produto principal.</b><span>Hoje é protótipo — núcleo local 0.2, web e iPhone 1.0, Android 1.5. Mesmo dando certo, chega a 2055 com 20 mil assinantes e continua menor que os jogos.</span></div></li>
+      <li><span class="mk">2047</span><div><b>O console é uma decisão de orgulho, não de lucro.</b><span>Lança em 2047 com 1.800 unidades e 90% de custo. Ele aparece grande na coluna de receita e quase zerado no resultado. Na vida real, os anos de P&amp;D antes disso só consomem dinheiro.</span></div></li>
+      <li><span class="mk">todos</span><div><b>O YouTube nunca é a fonte principal.</b><span>Fecha os trinta anos com cerca de 1% da receita. O valor dele é levar público para os jogos — o que o modelo <em>não</em> consegue medir, e por isso subestima.</span></div></li>
+      <li><span class="mk">2055</span><div><b>Nenhuma frente cresce para sempre.</b><span>Visitas no Roblox caem depois de 2045, o catálogo de jogos estabiliza em 13 títulos e as vendas por título param de subir. Uma projeção de 30 anos que só sobe seria a mesma mentira de antes, com mais casas decimais.</span></div></li>
+    </ol>
+  </section>
+</main>
+
+<footer class="shell">
+  <div class="rule"></div>
+  <div>Horizonte Digital · modelo v2 · 30 anos · revisado em 21 de agosto de 2026.</div>
+  <div>Inflação suposta de 4,0% ao ano · câmbio fixo de R$ 5,40 por dólar · sem descontar investimento em capital nem o custo do tempo dos fundadores.</div>
+  <div>Números imaginados, calculados a partir de drivers explícitos, para discussão.</div>
+</footer>
+
+<script>
+"use strict";
+/* ===========================================================
+   MODELO — nenhuma receita é digitada; tudo sai dos drivers
+   =========================================================== */
+const A0=2026,A1=2055,ANOS=[];for(let a=A0;a<=A1;a++)ANOS.push(a);
+const INFL=.04,CAMBIO=5.40,DEVEX=.0035*CAMBIO,RBX_SHARE=.28,CUT=.30,YT_SHARE=.55,GATE=.06,DIST=.12;
+
+function ramp(y,p){
+  const k=Object.keys(p).map(Number).sort((a,b)=>a-b);
+  if(y<=k[0])return p[k[0]];
+  if(y>=k[k.length-1])return p[k[k.length-1]];
+  for(let i=0;i<k.length-1;i++)if(y>=k[i]&&y<=k[i+1]){
+    const t=(y-k[i])/(k[i+1]-k[i]);return p[k[i]]+t*(p[k[i+1]]-p[k[i]]);
+  }
+}
+const de=(y,ini,p)=>y<ini?0:ramp(y,p);
+
+const CUSTO={games:.45,studios:.62,ia:.38,canal:.30,inter:.90};
+const aliq=f=>f<=180e3?.06:f<=360e3?.068:f<=720e3?.084:f<=1.8e6?.106:f<=3.6e6?.13:f<=4.8e6?.155:.145;
+const NEUTRO={rbx:1,prem:1,aw:1,awSlip:0,ser:1,stream:1,ia:1,canal:1,inter:1};
+const AW_LANC={2035:45000,2040:95000,2044:150000,2048:210000,2052:270000};
+const AW_DECAY=.62;
+
+function modelo(mult){
+  const k=Object.assign({},NEUTRO,mult||{});
+  const awUn=y=>{let u=0;for(const l in AW_LANC){const d=y-(+l+k.awSlip);if(d>=0)u+=AW_LANC[l]*k.aw*Math.pow(AW_DECAY,d);}return u;};
+  const awBase=y=>{let b=0;for(let i=0;i<5;i++)b+=awUn(y-i);return b;};
+  const M={};
+  for(const y of ANOS){
+    /* --- Horizonte Games --- */
+    const visitas=de(y,2026,{2026:40e3,2027:220e3,2028:900e3,2029:2.2e6,2030:3.4e6,2032:6e6,2035:9e6,2040:12e6,2045:12.5e6,2050:11e6,2055:9.5e6})*k.rbx;
+    const conv=ramp(y,{2026:.008,2030:.011,2035:.014,2045:.015,2055:.015});
+    const rpp=ramp(y,{2026:90,2030:110,2035:160,2040:190,2045:220,2050:250,2055:280});
+    const robux=visitas*conv*rpp, rbxRec=robux*DEVEX;
+    const cat=de(y,2029,{2029:1,2031:2,2033:3,2035:4,2040:7,2045:9,2050:11,2055:13});
+    const unid=de(y,2029,{2029:3500,2031:6000,2033:9000,2035:11000,2040:13000,2045:14000,2050:14000,2055:13000})*k.prem;
+    const preco=de(y,2029,{2029:22,2035:34,2040:42,2045:52,2050:63,2055:77});
+    const premBru=cat*unid*preco;
+    const awPr=de(y,2035,{2035:89,2040:108,2045:132,2050:160,2055:195});
+    const arpu=de(y,2036,{2036:12,2040:16,2045:21,2050:26,2055:30});
+    const awU=awUn(y), awBru=awU*awPr+awBase(y)*arpu;
+    /* --- Horizonte Studios --- */
+    const curtas=(y>=2030&&y<=2033)?ramp(y,{2030:5000,2031:25000,2032:70000,2033:60000}):0;
+    const eps=de(y,2033,{2033:8,2035:10,2038:14,2042:18,2046:20,2050:22,2055:24})*k.ser;
+    const licEp=de(y,2033,{2033:45000,2038:62000,2045:95000,2050:120000,2055:150000});
+    const series=eps*licEp;
+    const assS=de(y,2038,{2038:3000,2040:6500,2042:14000,2046:26000,2050:36000,2055:46000})*k.stream;
+    const mensS=de(y,2038,{2038:14.9,2045:24,2050:31,2055:39});
+    const strBru=assS*mensS*12;
+    /* --- Horizonte IA --- */
+    const assI=de(y,2029,{2029:120,2030:400,2032:1000,2035:2000,2040:5500,2045:10000,2050:15000,2055:20000})*k.ia;
+    const mensI=de(y,2029,{2029:14.9,2035:22,2040:28,2045:34,2050:42,2055:52});
+    const b2b=de(y,2038,{2038:80e3,2045:500e3,2050:1.1e6,2055:2.0e6})*k.ia;
+    const iaBru=assI*mensI*12;
+    /* --- Canal --- */
+    const views=de(y,2027,{2027:180e3,2028:550e3,2029:1.2e6,2030:2.2e6,2032:4.5e6,2035:8e6,2040:14e6,2045:18e6,2050:20e6,2055:20e6})*k.canal;
+    const rpm=de(y,2027,{2027:7,2030:8.5,2035:11,2040:13,2045:15,2050:16.5,2055:18});
+    const vids=de(y,2030,{2030:6,2035:12,2040:18,2045:20,2055:20});
+    const cache=de(y,2030,{2030:1200,2035:3000,2040:6000,2045:11000,2050:16000,2055:22000});
+    const ads=views*rpm/1000, patro=vids*cache;
+    /* --- Interactive --- */
+    const devkits=(y>=2035&&y<2047)?ramp(y,{2035:60,2038:120,2042:200,2046:240}):0;
+    const pDev=ramp(y,{2035:2500,2042:3200,2046:4000});
+    const cUn=de(y,2047,{2047:1800,2050:4000,2052:6000,2055:7500})*k.inter;
+    const cPr=de(y,2047,{2047:1900,2050:2050,2055:2400});
+    const intBru=devkits*pDev+cUn*cPr;
+
+    const rec={
+      games:rbxRec+premBru*(1-CUT)+awBru*(1-CUT),
+      studios:curtas+series+strBru*(1-GATE),
+      ia:iaBru*(1-GATE)+b2b,
+      canal:ads+patro,
+      inter:intBru*(1-DIST)
+    };
+    const bru={
+      games:rbxRec/RBX_SHARE+premBru+awBru,
+      studios:curtas+series+strBru,
+      ia:iaBru+b2b,
+      canal:ads/YT_SHARE+patro,
+      inter:intBru
+    };
+    const tot=rec.games+rec.studios+rec.ia+rec.canal+rec.inter;
+    const totBru=bru.games+bru.studios+bru.ia+bru.canal+bru.inter;
+    const custoDir=Object.keys(CUSTO).reduce((s,x)=>s+rec[x]*CUSTO[x],0);
+    const estrut=ramp(y,{2026:1200,2028:6000,2030:28e3,2033:110e3,2035:260e3,2040:1.5e6,2045:3.6e6,2050:6.5e6,2055:9.5e6});
+    const imposto=tot*aliq(tot);
+    M[y]={rec,bru,tot,totBru,custoDir,estrut,imposto,
+      result:tot-custoDir-estrut-imposto,
+      lanc:Object.keys(AW_LANC).some(l=>+l+k.awSlip===y),
+      d:{visitas,conv,rpp,cat,unid,preco,awU,awPr,assS,mensS,assI,mensI,views,rpm,cUn}};
+  }
+  return M;
+}
+
+const CENARIOS={
+  cauteloso:{nome:"Cauteloso",mult:{rbx:.6,prem:.5,aw:.3,awSlip:4,ser:.5,stream:.25,ia:.4,canal:.6,inter:.15},
+    texto:"Os jogos saem, nenhum estoura, o AeroWorld atrasa quatro anos e vende um terço do previsto. O streaming próprio nunca passa de um teste."},
+  base:{nome:"Base",mult:{},
+    texto:"Cada frente entra no ano planejado e cresce sem milagre. O AeroWorld vira franquia com uma sequência a cada quatro anos."},
+  otimista:{nome:"Otimista",mult:{rbx:1.8,prem:1.7,aw:2.4,awSlip:-1,ser:1.5,stream:2.2,ia:2,canal:1.7,inter:1.6},
+    texto:"Um dos jogos vira sucesso internacional, o AeroWorld antecipa um ano e o streaming conquista público fora do círculo do projeto."}
+};
+
+const FRENTES=[
+  {k:"games",nome:"Horizonte Games",sub:"Jogos e universos",cor:"var(--s1)",
+   formula:"visitas × %pagantes × Robux\n  × R$ 0,0189 (DevEx)\n+ títulos × cópias × preço × 0,70\n+ AeroWorld: unidades × preço\n  × 0,70 + base instalada × ARPU",
+   texto:"Começa com Robux dos projetos no Roblox, ganha corpo com o primeiro jogo pago em 2029 e passa a viver da franquia AeroWorld a partir de 2035. É a divisão que decide o total."},
+  {k:"studios",nome:"Horizonte Studios",sub:"Filmes, séries e streaming",cor:"var(--s2)",
+   formula:"episódios × licença por episódio\n+ assinantes × mensalidade × 12\n  × 0,94 (gateway)",
+   texto:"Entra em 2033 licenciando episódios, porque licenciar não exige público próprio. O streaming da casa só abre em 2038, quando existe catálogo — e depois disso cresce mais rápido que tudo, menos os jogos."},
+  {k:"ia",nome:"Horizonte IA",sub:"Assinaturas e API",cor:"var(--s3)",
+   formula:"assinantes × mensalidade × 12\n  × 0,94 (gateway)\n+ licenças B2B",
+   texto:"Hoje é protótipo: núcleo local 0.2, web e iPhone 1.0, Android 1.5. Vira receita em 2029 e chega a 2055 com 20 mil assinantes — respeitável, e ainda assim menor que os jogos."},
+  {k:"canal",nome:"Canal YouTube",sub:"Devlogs e bastidores",cor:"var(--s4)",
+   formula:"views × RPM ÷ 1.000\n+ vídeos patrocinados × cachê",
+   texto:"Nunca passa de cerca de 1% da receita. O valor dele é levar público para os jogos — efeito real que este modelo não sabe medir e, por isso, subestima."},
+  {k:"inter",nome:"Horizonte Interactive",sub:"Hardware e console",cor:"var(--s5)",
+   formula:"devkits × preço (2035–2046)\n+ consoles × preço × 0,88\n  (custo direto: 90%)",
+   texto:"Devkits simbólicos a partir de 2035, console de verdade em 2047. Aparece grande na receita e quase zerado no resultado: 90% do preço vira custo. É a linha que melhor mostra por que receita não é lucro."}
+];
+
+/* ===========================================================
+   ESTADO E FORMATAÇÃO
+   =========================================================== */
+let cenAtual="base", moeda="nom", janela="tudo";
+let M=modelo(CENARIOS.base.mult);
+
+const defl=y=>Math.pow(1+INFL,y-A0);
+const conv=(v,y)=>moeda==="nom"?v:v/defl(y);
+const brl=v=>"R$ "+Math.round(v).toLocaleString("pt-BR");
+function curto(v){
+  const a=Math.abs(v);
+  if(a<1)return "—";
+  const s=v<0?"−":"";
+  if(a>=1e9)return s+"R$ "+(a/1e9).toFixed(2).replace(".",",")+" bi";
+  if(a>=1e6)return s+"R$ "+(a/1e6).toFixed(a>=1e8?0:1).replace(".",",")+" mi";
+  if(a>=1e3)return s+"R$ "+Math.round(a/1e3).toLocaleString("pt-BR")+" mil";
+  return s+"R$ "+Math.round(a);
+}
+const n0=v=>Math.round(v).toLocaleString("pt-BR");
+const pct=v=>(v*100).toFixed(1).replace(".",",")+"%";
+const somaAnos=fn=>ANOS.reduce((s,y)=>s+conv(fn(M[y]),y),0);
+const somaFrente=k=>ANOS.reduce((s,y)=>s+conv(M[y].rec[k],y),0);
+const totAno=y=>conv(M[y].tot,y);
+
+/* ===========================================================
+   PAINEL
+   =========================================================== */
+function renderTiles(){
+  const total=somaAnos(m=>m.tot);
+  const result=somaAnos(m=>m.result);
+  const cortes=somaAnos(m=>m.totBru-m.tot);
+  const primeiroMi=ANOS.find(y=>M[y].tot>1e6);
+  const primeiroLucro=ANOS.find(y=>M[y].result>0);
+  const share=somaFrente("games")/total;
+  const t=[
+    ["Receita 30 anos",curto(total),"Soma das cinco frentes","mark"],
+    ["Receita em 2055",curto(totAno(2055)),"Último ano da projeção",""],
+    ["Resultado acumulado",curto(result),"Depois de custos, estrutura e impostos",""],
+    ["Fica com as plataformas",curto(cortes),"Roblox, Steam, lojas, YouTube e varejo",""],
+    ["1º ano acima de R$ 1 mi",primeiroMi?String(primeiroMi):"nunca","Depois de "+(primeiroMi?primeiroMi-A0:"—")+" anos de valores pequenos",""],
+    ["Peso dos jogos",pct(share),"Da receita dos trinta anos",""]
+  ];
+  document.getElementById("tiles").innerHTML=t.map(([l,v,d,c])=>
+    '<div class="tile '+c+'"><span class="lab">'+l+'</span><span class="val">'+v+'</span><span class="desc">'+d+'</span></div>').join("");
+  document.getElementById("heroTotal").textContent=curto(total);
+  document.getElementById("heroReal").textContent=
+    moeda==="nom"?("equivale a "+curto(ANOS.reduce((s,y)=>s+M[y].tot/defl(y),0))+" em reais de 2026")
+                 :("em reais correntes seriam "+curto(ANOS.reduce((s,y)=>s+M[y].tot,0)));
+  document.getElementById("cenLabel").textContent="cenário "+CENARIOS[cenAtual].nome.toLowerCase();
+  const _l=primeiroLucro;
+  document.getElementById("tornFoot").textContent=
+    "No cenário "+CENARIOS[cenAtual].nome.toLowerCase()+", o primeiro ano com resultado positivo é "+(_l||"nenhum")+
+    ". Atrasar o AeroWorld em cinco anos, sozinho, muda a receita de 30 anos em "+
+    pctSinal(somaTotalDe({awSlip:5})/somaTotalDe({})-1)+".";
+}
+function somaTotalDe(mult){
+  const base=Object.assign({},CENARIOS[cenAtual].mult);
+  for(const k in mult)base[k]=(k==="awSlip")?(base.awSlip||0)+mult[k]:(base[k]||1)*mult[k];
+  const mm=modelo(base);
+  return ANOS.reduce((s,y)=>s+conv(mm[y].tot,y),0);
+}
+const pctSinal=v=>(v>=0?"+":"−")+Math.abs(v*100).toFixed(1).replace(".",",")+"%";
+
+/* ===========================================================
+   GRÁFICO — colunas empilhadas
+   =========================================================== */
+const SVG="http://www.w3.org/2000/svg";
+function escalaY(max){
+  if(max<=0)return {step:1,top:1,ticks:1};
+  const bruto=max/5,mag=Math.pow(10,Math.floor(Math.log10(bruto))),n=bruto/mag;
+  const step=(n<=1?1:n<=1.5?1.5:n<=2?2:n<=2.5?2.5:n<=3?3:n<=4?4:n<=5?5:10)*mag;
+  const ticks=Math.ceil(max/step);
+  return {step,top:step*ticks,ticks};
+}
+const enxuto=x=>(Math.round(x*10)/10).toLocaleString("pt-BR");
+function eixoY(v){
+  if(v===0)return "0";
+  if(v>=1e9)return enxuto(v/1e9)+" bi";
+  if(v>=1e6)return enxuto(v/1e6)+" mi";
+  if(v>=1e3)return enxuto(v/1e3)+" mil";
+  return n0(v);
+}
+function topRounded(x,y,w,h,r){
+  r=Math.min(r,w/2,h);
+  return "M"+x+","+(y+h)+" L"+x+","+(y+r)+" Q"+x+","+y+" "+(x+r)+","+y+
+         " L"+(x+w-r)+","+y+" Q"+(x+w)+","+y+" "+(x+w)+","+(y+r)+" L"+(x+w)+","+(y+h)+" Z";
+}
+function renderChart(){
+  const svg=document.getElementById("chart");
+  const tip=document.getElementById("tip");
+  while(svg.firstChild)svg.removeChild(svg.firstChild);
+  const anos=janela==="cedo"?ANOS.filter(y=>y<=2040):ANOS;
+  const W=1000,H=380,mL=68,mR=10,mT=16,mB=30;
+  const pw=W-mL-mR,ph=H-mT-mB;
+  const max=Math.max(...anos.map(totAno));
+  const {step:passoY,top,ticks}=escalaY(max);
+  const sy=v=>mT+ph-(v/top)*ph;
+  const bw=Math.min(pw/anos.length*0.72,26);
+  const step=pw/anos.length;
+
+  const g=document.createElementNS(SVG,"g");
+  /* grade */
+  for(let i=0;i<=ticks;i++){
+    const v=passoY*i,yy=sy(v);
+    const ln=document.createElementNS(SVG,"line");
+    ln.setAttribute("x1",mL);ln.setAttribute("x2",W-mR);ln.setAttribute("y1",yy);ln.setAttribute("y2",yy);
+    ln.setAttribute("stroke","var(--rule-soft)");ln.setAttribute("stroke-width",i===0?1.2:1);
+    if(i>0)ln.setAttribute("stroke-dasharray","3 4");
+    g.appendChild(ln);
+    const tx=document.createElementNS(SVG,"text");
+    tx.setAttribute("x",mL-10);tx.setAttribute("y",yy+4);tx.setAttribute("text-anchor","end");
+    tx.setAttribute("fill","var(--ink-3)");tx.setAttribute("font-family","DM Mono, monospace");tx.setAttribute("font-size","11");
+    tx.textContent=eixoY(v);
+    g.appendChild(tx);
+  }
+  /* colunas */
+  anos.forEach((y,i)=>{
+    const cx=mL+step*i+(step-bw)/2;
+    let acc=0;
+    const segs=FRENTES.map(f=>({f,v:conv(M[y].rec[f.k],y)})).filter(s=>s.v>0);
+    segs.forEach((s,j)=>{
+      const y0=sy(acc+s.v),y1=sy(acc);
+      let h=y1-y0;
+      const topo=j===segs.length-1;
+      if(!topo)h=Math.max(h-2,0.6); /* 2px de respiro entre segmentos */
+      if(h<=0)return;
+      const el=document.createElementNS(SVG,topo?"path":"rect");
+      if(topo){el.setAttribute("d",topRounded(cx,y0,bw,h,4));}
+      else{el.setAttribute("x",cx);el.setAttribute("y",y0);el.setAttribute("width",bw);el.setAttribute("height",h);}
+      el.setAttribute("fill",s.f.cor);
+      g.appendChild(el);
+      acc+=s.v;
+    });
+    /* rótulo do eixo x: a cada 5 anos */
+    if(y%5===0||y===A0||y===A1||(janela==="cedo"&&y%2===0)){
+      const tx=document.createElementNS(SVG,"text");
+      tx.setAttribute("x",cx+bw/2);tx.setAttribute("y",H-10);tx.setAttribute("text-anchor","middle");
+      tx.setAttribute("fill","var(--ink-3)");tx.setAttribute("font-family","DM Mono, monospace");tx.setAttribute("font-size","11");
+      tx.textContent=y;
+      g.appendChild(tx);
+    }
+    /* alvo de hover, maior que a marca */
+    const hit=document.createElementNS(SVG,"rect");
+    hit.setAttribute("x",mL+step*i);hit.setAttribute("y",mT);
+    hit.setAttribute("width",step);hit.setAttribute("height",ph);
+    hit.setAttribute("fill","transparent");hit.style.cursor="pointer";
+    hit.setAttribute("tabindex","0");hit.setAttribute("role","button");
+    hit.setAttribute("aria-label",y+": "+brl(totAno(y)));
+    const mostra=()=>{
+      const segs2=FRENTES.filter(f=>M[y].rec[f.k]>0);
+      tip.innerHTML='<div class="ty">'+y+(M[y].lanc?" · lançamento AeroWorld":"")+'</div>'+
+        '<div class="tt">'+brl(totAno(y))+'</div><ul>'+
+        segs2.map(f=>'<li><span><i style="background:'+f.cor+'"></i>'+f.nome.replace("Horizonte ","")+'</span><b>'+
+          curto(conv(M[y].rec[f.k],y))+'</b></li>').join('')+
+        '<li style="border-top:1px solid var(--rule-soft);margin-top:.25rem;padding-top:.25rem"><span>Resultado</span><b>'+
+          curto(conv(M[y].result,y))+'</b></li></ul>';
+      tip.classList.add("on");
+      const wrap=svg.parentElement.getBoundingClientRect();
+      const r=hit.getBoundingClientRect();
+      let left=r.left-wrap.left+r.width/2-103+svg.parentElement.scrollLeft;
+      left=Math.max(4,Math.min(left,svg.parentElement.clientWidth-210+svg.parentElement.scrollLeft));
+      tip.style.left=left+"px";
+      tip.style.top=Math.max(0,r.top-wrap.top-8)+"px";
+    };
+    hit.addEventListener("mouseenter",mostra);
+    hit.addEventListener("focus",mostra);
+    hit.addEventListener("mouseleave",()=>tip.classList.remove("on"));
+    hit.addEventListener("blur",()=>tip.classList.remove("on"));
+    g.appendChild(hit);
+  });
+  svg.appendChild(g);
+
+  document.getElementById("legend").innerHTML=FRENTES.map(f=>
+    '<span><i style="background:'+f.cor+'"></i>'+f.nome+'</span>').join("");
+  document.getElementById("chartSub").textContent=
+    "empilhada por divisão · "+(moeda==="nom"?"reais correntes":"reais de 2026");
+  const picos=ANOS.filter(y=>M[y].lanc);
+  document.getElementById("chartFoot").textContent=
+    janela==="cedo"
+      ? "Zoom nos primeiros quinze anos, na escala deles. Vistos junto com 2055, esses anos somem — juntos valem "+
+        pct(ANOS.filter(y=>y<=2040).reduce((s,y)=>s+totAno(y),0)/somaAnos(m=>m.tot))+" da receita dos trinta anos."
+      : "Os picos estão em "+picos.join(", ")+" — os lançamentos da franquia. Entre eles a receita cai, porque a cauda de um jogo vale cerca de 62% do ano anterior. Use o zoom para enxergar os primeiros quinze anos, que nesta escala não aparecem.";
+}
+
+/* ===========================================================
+   CASCATA
+   =========================================================== */
+function renderCasc(){
+  const bruto=somaAnos(m=>m.totBru);
+  const rec=somaAnos(m=>m.tot);
+  const cortes=bruto-rec;
+  const imp=somaAnos(m=>m.imposto);
+  const cd=somaAnos(m=>m.custoDir);
+  const es=somaAnos(m=>m.estrut);
+  const res=rec-imp-cd-es;
+  const linhas=[
+    ["Gasto do público",bruto,"total","var(--ink-3)"],
+    ["Cortes de plataforma",-cortes,"minus","var(--neg)"],
+    ["Receita da empresa",rec,"total","var(--accent)"],
+    ["Impostos",-imp,"minus","var(--neg)"],
+    ["Custo direto de produção",-cd,"minus","var(--neg)"],
+    ["Estrutura",-es,"minus","var(--neg)"],
+    ["Resultado operacional",res,"res","var(--accent)"]
+  ];
+  document.getElementById("casc").innerHTML=linhas.map(([n,v,cls,cor])=>
+    '<div class="casc-row '+cls+'"><span class="n">'+n+'</span>'+
+    '<span class="track"><i style="width:'+Math.max(Math.abs(v)/bruto*100,.6)+'%;background:'+cor+'"></i></span>'+
+    '<span class="v">'+(v<0?"− ":"")+curto(Math.abs(v)).replace("−","")+'</span></div>').join("")+
+    '<div class="casc-row"><span class="n" style="color:var(--ink-3)">Margem operacional</span>'+
+    '<span></span><span class="v" style="color:var(--ink-3)">'+pct(res/rec)+' da receita</span></div>';
+}
+
+/* ===========================================================
+   TABELA
+   =========================================================== */
+function renderTabela(){
+  const tb=document.getElementById("tbody");
+  tb.innerHTML=ANOS.map(y=>{
+    const m=M[y];
+    const cels=FRENTES.map(f=>m.rec[f.k]>0?n0(conv(m.rec[f.k],y)):"—");
+    const r=conv(m.result,y);
+    return '<tr'+(m.lanc?' class="era"':'')+'><td>'+y+'</td>'+
+      cels.map(c=>'<td>'+c+'</td>').join("")+
+      '<td class="tot">'+n0(totAno(y))+'</td>'+
+      '<td class="'+(r>=0?"pos":"negv")+'">'+(r<0?"−":"")+n0(Math.abs(r))+'</td></tr>';
+  }).join("");
+  const somas=FRENTES.map(f=>somaFrente(f.k));
+  document.getElementById("tfoot").innerHTML='<tr><td>30 anos</td>'+
+    somas.map(v=>'<td>'+n0(v)+'</td>').join("")+
+    '<td>'+n0(somaAnos(m=>m.tot))+'</td><td>'+n0(somaAnos(m=>m.result))+'</td></tr>';
+}
+
+/* ===========================================================
+   DIVISÕES
+   =========================================================== */
+function renderDivs(){
+  const total=somaAnos(m=>m.tot);
+  document.getElementById("divs").innerHTML=FRENTES.map(f=>{
+    const v=somaFrente(f.k),p=v/total*100;
+    return '<div class="divrow"><div class="divhead">'+
+      '<div class="divname"><i style="background:'+f.cor+'"></i><div>'+f.nome+'<small>'+f.sub+'</small></div></div>'+
+      '<div class="divnum">'+curto(v)+'<em>'+p.toFixed(1).replace(".",",")+'% do total</em></div></div>'+
+      '<div class="meter"><i style="width:'+Math.max(p,.8)+'%;background:'+f.cor+'"></i></div>'+
+      '<p>'+f.texto+'</p></div>';
+  }).join("");
+}
+
+/* ===========================================================
+   SENSIBILIDADE (tornado)
+   =========================================================== */
+const DRIVERS=[
+  ["aw","Unidades do AeroWorld"],
+  ["stream","Assinantes do streaming"],
+  ["ia","Assinantes da Horizonte IA"],
+  ["prem","Cópias por jogo pago"],
+  ["inter","Consoles vendidos"],
+  ["ser","Episódios licenciados"],
+  ["rbx","Visitas no Roblox"],
+  ["canal","Views no YouTube"]
+];
+function renderTorn(){
+  const base=somaTotalDe({});
+  const linhas=DRIVERS.map(([k,nome])=>{
+    const lo=somaTotalDe({[k]:.7})/base-1;
+    const hi=somaTotalDe({[k]:1.3})/base-1;
+    return {nome,lo,hi,amp:Math.max(Math.abs(lo),Math.abs(hi))};
+  }).sort((a,b)=>b.amp-a.amp);
+  const maxAmp=Math.max(...linhas.map(l=>l.amp),.02);
+  document.getElementById("torn").innerHTML=linhas.map(l=>{
+    const wl=Math.abs(l.lo)/maxAmp*40,wh=Math.abs(l.hi)/maxAmp*40;
+    return '<div class="torn-row"><span class="n">'+l.nome+'</span>'+
+      '<span class="torn-bar"><span class="mid"></span>'+
+      '<i style="right:50%;width:'+wl+'%;background:var(--neg)"></i>'+
+      '<i style="left:50%;width:'+wh+'%;background:var(--pos)"></i>'+
+      '<b style="right:'+(50+wl)+'%;padding-right:6px;text-align:right">'+pctSinal(l.lo)+'</b>'+
+      '<b style="left:'+(50+wh)+'%;padding-left:6px">'+pctSinal(l.hi)+'</b>'+
+      '</span></div>';
+  }).join("");
+}
+
+/* ===========================================================
+   CENÁRIOS
+   =========================================================== */
+function renderScen(){
+  document.getElementById("scen").innerHTML=Object.keys(CENARIOS).map(k=>{
+    const mm=modelo(CENARIOS[k].mult);
+    const t=ANOS.reduce((s,y)=>s+conv(mm[y].tot,y),0);
+    return '<div class="scen-card'+(k===cenAtual?" on":"")+'"><span class="tag">'+
+      CENARIOS[k].nome+(k===cenAtual?" · em exibição":"")+'</span>'+
+      '<span class="big">'+curto(t)+'</span><p>'+CENARIOS[k].texto+'</p></div>';
+  }).join("");
+}
+
+/* ===========================================================
+   DRIVERS
+   =========================================================== */
+const MARCOS=[2026,2030,2035,2040,2045,2050,2055];
+const LINHAS_D=[
+  ["Visitas no Roblox / ano",m=>n0(m.d.visitas)],
+  ["Jogadores pagantes",m=>(m.d.conv*100).toFixed(1).replace(".",",")+"%"],
+  ["Robux por pagante",m=>n0(m.d.rpp)],
+  ["Títulos pagos no catálogo",m=>m.d.cat?n0(m.d.cat):"—"],
+  ["Cópias por título / ano",m=>m.d.unid?n0(m.d.unid):"—"],
+  ["Preço médio do jogo",m=>m.d.preco?"R$ "+n0(m.d.preco):"—"],
+  ["AeroWorld · unidades no ano",m=>m.d.awU>1?n0(m.d.awU):"—"],
+  ["AeroWorld · preço",m=>m.d.awPr?"R$ "+n0(m.d.awPr):"—"],
+  ["Assinantes do streaming",m=>m.d.assS?n0(m.d.assS):"—"],
+  ["Mensalidade do streaming",m=>m.d.mensS?"R$ "+m.d.mensS.toFixed(2).replace(".",","):"—"],
+  ["Assinantes da Horizonte IA",m=>m.d.assI?n0(m.d.assI):"—"],
+  ["Mensalidade da IA",m=>m.d.mensI?"R$ "+m.d.mensI.toFixed(2).replace(".",","):"—"],
+  ["Views no YouTube / ano",m=>m.d.views?n0(m.d.views):"—"],
+  ["RPM do canal",m=>m.d.rpm?"R$ "+m.d.rpm.toFixed(1).replace(".",","):"—"],
+  ["Consoles vendidos",m=>m.d.cUn?n0(m.d.cUn):"—"]
+];
+function renderDrivers(){
+  document.getElementById("dthead").innerHTML='<tr><th scope="col">Driver</th>'+
+    MARCOS.map(a=>'<th scope="col">'+a+'</th>').join("")+'</tr>';
+  document.getElementById("dtbody").innerHTML=LINHAS_D.map(([nome,fn])=>
+    '<tr><td>'+nome+'</td>'+MARCOS.map(a=>'<td>'+fn(M[a])+'</td>').join("")+'</tr>').join("");
+}
+
+/* ===========================================================
+   FÓRMULAS
+   =========================================================== */
+document.getElementById("forms").innerHTML=FRENTES.map(f=>
+  '<div class="form"><h3><i style="background:'+f.cor+'"></i>'+f.nome+'</h3>'+
+  '<code>'+f.formula+'</code></div>').join("")+
+  '<div class="form"><h3><i style="background:var(--ink-3)"></i>Do faturamento ao resultado</h3>'+
+  '<code>receita\n− custo direto (45% a 90%)\n− estrutura do ano\n− imposto (6% a 15,5%)\n= resultado operacional</code>'+
+  '<p>A alíquota segue a faixa de faturamento do ano, então ela sobe sozinha conforme a empresa cresce.</p></div>';
+
+/* ===========================================================
+   RENDER + CONTROLES
+   =========================================================== */
+function renderTudo(){
+  M=modelo(CENARIOS[cenAtual].mult);
+  renderTiles();renderChart();renderCasc();renderTabela();
+  renderDivs();renderTorn();renderScen();renderDrivers();
+}
+function liga(attr,fn){
+  document.querySelectorAll("[data-"+attr+"]").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const grupo=b.parentElement.querySelectorAll("[data-"+attr+"]");
+      grupo.forEach(x=>x.setAttribute("aria-pressed",String(x===b)));
+      fn(b.getAttribute("data-"+attr));
+    });
+  });
+}
+liga("cen",v=>{cenAtual=v;renderTudo();});
+liga("moeda",v=>{moeda=v;renderTudo();});
+liga("jan",v=>{janela=v;renderChart();});
+renderTudo();
+addEventListener("resize",()=>{clearTimeout(window.__rz);window.__rz=setTimeout(renderChart,150);});
+</script>
+
