@@ -1,0 +1,21 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "deco:papel_parede_verde",
+      "menu_category": { "category": "construction" }
+    },
+    "components": {
+      "minecraft:display_name": "Papel de Parede Verde",
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:material_instances": {
+        "*": { "texture": "deco_papel_verde", "render_method": "opaque" }
+      },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.5 },
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
+      "minecraft:map_color": "#68966c",
+      "minecraft:light_dampening": 15,
+      "minecraft:flammable": { "catch_chance_modifier": 5, "destroy_chance_modifier": 20 }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+pack.name=Decoração+ (Visual)
+pack.description=Texturas e modelos dos blocos decorativos.
+
+tile.deco:marmore_polido.name=Mármore Polido
+tile.deco:marmore_preto.name=Mármore Preto
+tile.deco:marmore_dourado.name=Mármore Dourado
+tile.deco:papel_parede_azul.name=Papel de Parede Azul
+tile.deco:papel_parede_rosa.name=Papel de Parede Rosa
+tile.deco:papel_parede_verde.name=Papel de Parede Verde
+tile.deco:estante_decorativa.name=Estante Decorativa
+tile.deco:cristal_luz.name=Cristal de Luz
+tile.deco:aquario.name=Aquário
+tile.deco:vaso_planta.name=Vaso de Planta
+tile.deco:vaso_flor.name=Vaso de Flores
+tile.deco:luminaria_teto.name=Luminária de Teto
+tile.deco:abajur.name=Abajur
+tile.deco:mesa_centro.name=Mesa de Centro
+tile.deco:almofada.name=Almofada
+tile.deco:tapete.name=Tapete de Luxo
+tile.deco:pilar_marmore.name=Pilar de Mármore

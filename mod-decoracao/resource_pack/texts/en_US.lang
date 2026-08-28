@@ -1,0 +1,20 @@
+pack.name=Decoracao+ (Resources)
+pack.description=Textures and models for the decoration blocks.
+
+tile.deco:marmore_polido.name=Polished Marble
+tile.deco:marmore_preto.name=Black Marble
+tile.deco:marmore_dourado.name=Golden Marble
+tile.deco:papel_parede_azul.name=Blue Wallpaper
+tile.deco:papel_parede_rosa.name=Pink Wallpaper
+tile.deco:papel_parede_verde.name=Green Wallpaper
+tile.deco:estante_decorativa.name=Decorative Bookshelf
+tile.deco:cristal_luz.name=Light Crystal
+tile.deco:aquario.name=Aquarium
+tile.deco:vaso_planta.name=Potted Plant
+tile.deco:vaso_flor.name=Flower Pot
+tile.deco:luminaria_teto.name=Ceiling Lamp
+tile.deco:abajur.name=Table Lamp
+tile.deco:mesa_centro.name=Coffee Table
+tile.deco:almofada.name=Cushion
+tile.deco:tapete.name=Fancy Rug
+tile.deco:pilar_marmore.name=Marble Pillar

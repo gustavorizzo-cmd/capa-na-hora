@@ -1,0 +1,17 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Decoração+ (Visual)",
+    "description": "Texturas e modelos dos blocos decorativos do Decoração+.",
+    "uuid": "aab4162a-9d83-44ea-982a-219c682a3e62",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 21, 0]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "e22fce9a-7b8b-49e7-976c-d8e3037160e2",
+      "version": [1, 0, 0]
+    }
+  ]
+}

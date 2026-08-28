@@ -1,0 +1,23 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Decoração+ (Comportamento)",
+    "description": "Blocos decorativos para deixar sua casa bonita: mármore, papel de parede, móveis, luminárias e mais.",
+    "uuid": "f236dd23-3846-466b-8c53-8645536dd67a",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 21, 0]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "d277dfcf-3cb3-45d3-a8d8-85f9f8433b04",
+      "version": [1, 0, 0]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "aab4162a-9d83-44ea-982a-219c682a3e62",
+      "version": [1, 0, 0]
+    }
+  ]
+}

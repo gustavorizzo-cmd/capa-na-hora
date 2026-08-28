@@ -1,0 +1,26 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "deco:aquario",
+      "menu_category": { "category": "construction" }
+    },
+    "components": {
+      "minecraft:display_name": "Aquário",
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "deco_aquario",
+          "render_method": "blend",
+          "face_dimming": true,
+          "ambient_occlusion": true
+        }
+      },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.5 },
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
+      "minecraft:light_emission": 6,
+      "minecraft:light_dampening": 0,
+      "minecraft:map_color": "#3c8ec2"
+    }
+  }
+}

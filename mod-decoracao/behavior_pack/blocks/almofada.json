@@ -1,0 +1,23 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "deco:almofada",
+      "menu_category": { "category": "construction" }
+    },
+    "components": {
+      "minecraft:display_name": "Almofada",
+      "minecraft:geometry": "geometry.deco_almofada",
+      "minecraft:material_instances": {
+        "*": { "texture": "deco_almofada", "render_method": "alpha_test" }
+      },
+      "minecraft:collision_box": { "origin": [-6, 0, -6], "size": [12, 5, 12] },
+      "minecraft:selection_box": { "origin": [-6, 0, -6], "size": [12, 5, 12] },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.3 },
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
+      "minecraft:light_dampening": 0,
+      "minecraft:map_color": "#ba5c6c",
+      "minecraft:flammable": { "catch_chance_modifier": 5, "destroy_chance_modifier": 20 }
+    }
+  }
+}

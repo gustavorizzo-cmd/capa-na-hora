@@ -1,0 +1,20 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "deco:marmore_preto",
+      "menu_category": { "category": "construction" }
+    },
+    "components": {
+      "minecraft:display_name": "Mármore Preto",
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:material_instances": {
+        "*": { "texture": "deco_marmore_preto", "render_method": "opaque" }
+      },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1.4 },
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:map_color": "#2c2c34",
+      "minecraft:light_dampening": 15
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "resource_pack_name": "decoracao_plus",
+  "texture_name": "atlas.terrain",
+  "padding": 8,
+  "num_mip_levels": 4,
+  "texture_data": {
+    "deco_marmore_polido": { "textures": "textures/blocks/deco_marmore_polido" },
+    "deco_marmore_preto": { "textures": "textures/blocks/deco_marmore_preto" },
+    "deco_marmore_dourado": { "textures": "textures/blocks/deco_marmore_dourado" },
+    "deco_papel_azul": { "textures": "textures/blocks/deco_papel_azul" },
+    "deco_papel_rosa": { "textures": "textures/blocks/deco_papel_rosa" },
+    "deco_papel_verde": { "textures": "textures/blocks/deco_papel_verde" },
+    "deco_estante": { "textures": "textures/blocks/deco_estante" },
+    "deco_cristal": { "textures": "textures/blocks/deco_cristal" },
+    "deco_aquario": { "textures": "textures/blocks/deco_aquario" },
+    "deco_vaso_planta": { "textures": "textures/blocks/deco_vaso_planta" },
+    "deco_vaso_flor": { "textures": "textures/blocks/deco_vaso_flor" },
+    "deco_luminaria": { "textures": "textures/blocks/deco_luminaria" },
+    "deco_abajur": { "textures": "textures/blocks/deco_abajur" },
+    "deco_mesa": { "textures": "textures/blocks/deco_mesa" },
+    "deco_almofada": { "textures": "textures/blocks/deco_almofada" },
+    "deco_tapete": { "textures": "textures/blocks/deco_tapete" },
+    "deco_pilar": { "textures": "textures/blocks/deco_pilar" }
+  }
+}

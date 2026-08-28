@@ -1,0 +1,20 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "deco:marmore_polido",
+      "menu_category": { "category": "construction" }
+    },
+    "components": {
+      "minecraft:display_name": "Mármore Polido",
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:material_instances": {
+        "*": { "texture": "deco_marmore_polido", "render_method": "opaque" }
+      },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1.4 },
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:map_color": "#eceae3",
+      "minecraft:light_dampening": 15
+    }
+  }
+}

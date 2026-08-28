@@ -1,0 +1,22 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "deco:pilar_marmore",
+      "menu_category": { "category": "construction" }
+    },
+    "components": {
+      "minecraft:display_name": "Pilar de Mármore",
+      "minecraft:geometry": "geometry.deco_pilar",
+      "minecraft:material_instances": {
+        "*": { "texture": "deco_pilar", "render_method": "alpha_test" }
+      },
+      "minecraft:collision_box": { "origin": [-7, 0, -7], "size": [14, 16, 14] },
+      "minecraft:selection_box": { "origin": [-7, 0, -7], "size": [14, 16, 14] },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1.5 },
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:light_dampening": 0,
+      "minecraft:map_color": "#e6e4dc"
+    }
+  }
+}
