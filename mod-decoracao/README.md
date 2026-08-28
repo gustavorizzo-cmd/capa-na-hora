@@ -3,11 +3,14 @@
 Add-on com **17 blocos decorativos** para Minecraft **Bedrock Edition**
 (o da Play Store: celular, tablet, Windows 10/11 e console).
 
-Arquivos prontos (o conteúdo é exatamente o mesmo nos dois):
+Arquivos prontos — escolha **um** conforme a situação:
 
-- **[`Decoracao_Plus.mcaddon`](Decoracao_Plus.mcaddon)** — instala com um toque
-- **[`Decoracao_Plus.zip`](Decoracao_Plus.zip)** — mesmo pacote em `.zip`, para
-  quando o navegador ou o app de arquivos não deixa baixar/abrir o `.mcaddon`
+| Arquivo | Quando usar |
+|---|---|
+| **[`Decoracao_Plus.mcaddon`](Decoracao_Plus.mcaddon)** | caminho normal: toque nele e o Minecraft importa tudo |
+| **[`Decoracao_Plus.zip`](Decoracao_Plus.zip)** | mesmo conteúdo do `.mcaddon`, quando o navegador não deixa baixar a extensão `.mcaddon` |
+| **[`Decoracao_Plus_Comportamento.mcpack`](Decoracao_Plus_Comportamento.mcpack)** | apps importadores ("zip to Minecraft" e parecidos), que importam um pacote por vez |
+| **[`Decoracao_Plus_Visual.mcpack`](Decoracao_Plus_Visual.mcpack)** | idem — precisa importar **os dois** `.mcpack`, senão os blocos ficam sem textura |
 
 ## Blocos
 
@@ -52,6 +55,20 @@ No modo sobrevivência dá para pegar por comando, por exemplo:
 
 > Se ao tocar no arquivo o Android não oferecer o Minecraft, tente abrir pelo
 > gerenciador de arquivos do Samsung ("Meus Arquivos") em vez do navegador.
+
+### Usando um app importador ("zip to Minecraft" e similares)
+
+Esses apps costumam importar **um pacote por vez**, então use os `.mcpack`:
+
+1. Importe o **`Decoracao_Plus_Comportamento.mcpack`**.
+2. Importe o **`Decoracao_Plus_Visual.mcpack`**.
+3. No mundo: **Editar** → ative *Decoração+ (Comportamento)* em
+   **Pacotes de comportamento** e *Decoração+ (Visual)* em
+   **Pacotes de recursos**.
+
+Precisa dos dois: o de comportamento cria os blocos, o visual dá textura e
+formato a eles. Só com um, os blocos aparecem sem aparência (roxo/preto)
+ou nem aparecem.
 
 ### Se você baixou o `.zip`
 
