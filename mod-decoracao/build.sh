@@ -4,6 +4,8 @@
 #   Decoracao_Plus.mcaddon -> instala com um toque no Android/Windows
 #   Decoracao_Plus.zip      -> mesmo arquivo, para quem prefere .zip
 #   *.mcpack                -> um pacote por arquivo, para apps importadores
+# Cada um sai tambem em .zip (mesmo conteudo), para navegadores e apps que
+# so aceitam a extensao .zip.
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -27,6 +29,12 @@ rm -f Decoracao_Plus_Comportamento.mcpack Decoracao_Plus_Visual.mcpack
 ( cd resource_pack && zip -r -q -X ../Decoracao_Plus_Visual.mcpack . \
     -x '.DS_Store' '*__pycache__*' )
 
-for f in "$OUT" "$ZIP" Decoracao_Plus_Comportamento.mcpack Decoracao_Plus_Visual.mcpack; do
+# copias em .zip de cada pacote
+rm -f Decoracao_Plus_Comportamento.zip Decoracao_Plus_Visual.zip
+cp Decoracao_Plus_Comportamento.mcpack Decoracao_Plus_Comportamento.zip
+cp Decoracao_Plus_Visual.mcpack Decoracao_Plus_Visual.zip
+
+for f in "$OUT" "$ZIP" Decoracao_Plus_Comportamento.mcpack Decoracao_Plus_Visual.mcpack \
+         Decoracao_Plus_Comportamento.zip Decoracao_Plus_Visual.zip; do
   echo "Pronto: $(pwd)/$f ($(du -h "$f" | cut -f1))"
 done

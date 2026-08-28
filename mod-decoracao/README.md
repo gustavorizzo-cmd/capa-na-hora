@@ -11,6 +11,11 @@ Arquivos prontos — escolha **um** conforme a situação:
 | **[`Decoracao_Plus.zip`](Decoracao_Plus.zip)** | mesmo conteúdo do `.mcaddon`, quando o navegador não deixa baixar a extensão `.mcaddon` |
 | **[`Decoracao_Plus_Comportamento.mcpack`](Decoracao_Plus_Comportamento.mcpack)** | apps importadores ("zip to Minecraft" e parecidos), que importam um pacote por vez |
 | **[`Decoracao_Plus_Visual.mcpack`](Decoracao_Plus_Visual.mcpack)** | idem — precisa importar **os dois** `.mcpack`, senão os blocos ficam sem textura |
+| **[`Decoracao_Plus_Comportamento.zip`](Decoracao_Plus_Comportamento.zip)** | igual ao `.mcpack` acima, com extensão `.zip` |
+| **[`Decoracao_Plus_Visual.zip`](Decoracao_Plus_Visual.zip)** | igual ao `.mcpack` acima, com extensão `.zip` |
+
+Os pares `.mcpack` / `.zip` são o **mesmo arquivo**, só muda a extensão — use a
+que o seu navegador ou app aceitar.
 
 ## Blocos
 
@@ -58,10 +63,11 @@ No modo sobrevivência dá para pegar por comando, por exemplo:
 
 ### Usando um app importador ("zip to Minecraft" e similares)
 
-Esses apps costumam importar **um pacote por vez**, então use os `.mcpack`:
+Esses apps costumam importar **um pacote por vez**, então use os dois
+pacotes separados (`.mcpack` ou `.zip`, o que o app aceitar):
 
-1. Importe o **`Decoracao_Plus_Comportamento.mcpack`**.
-2. Importe o **`Decoracao_Plus_Visual.mcpack`**.
+1. Importe o **`Decoracao_Plus_Comportamento`**.
+2. Importe o **`Decoracao_Plus_Visual`**.
 3. No mundo: **Editar** → ative *Decoração+ (Comportamento)* em
    **Pacotes de comportamento** e *Decoração+ (Visual)* em
    **Pacotes de recursos**.
