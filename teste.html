@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Mini Minecraft 2D – teste de assets</title>
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#79c8ff;font-family:Arial,sans-serif;touch-action:none;user-select:none;-webkit-user-select:none}
+canvas{display:block;width:100vw;height:100vh}
+#m{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#8fd3ffcc}
+#p{background:#222;color:#fff;padding:25px;border-radius:18px;text-align:center;max-width:320px}
+#p img{width:48px;height:76px;image-rendering:auto}
+#p small{display:block;opacity:.7;margin:10px 0 16px}
+button{font-size:22px;padding:14px 24px;border:0;border-radius:12px;background:#35a853;color:#fff;font-weight:bold}
+.c{position:fixed;bottom:20px;width:62px;height:62px;border-radius:50%;background:#0009;color:#fff;display:none;align-items:center;justify-content:center;font-size:26px}
+.l{left:15px}.r{left:90px}.j{right:15px}.b{right:90px;font-size:13px}
+#inv{position:fixed;top:10px;left:10px;display:none;gap:6px}
+.slot{width:46px;height:46px;background:#0009;border-radius:8px;position:relative;display:flex;align-items:center;justify-content:center}
+.slot img{width:36px;height:36px}
+.slot span{position:absolute;right:4px;bottom:2px;color:#fff;font-size:12px;font-weight:bold;text-shadow:0 1px 2px #000}
+</style>
+</head>
+<body>
+<canvas id="g"></canvas>
+<div id="m"><div id="p">
+  <img src="assets/personagem/parado_0.png" alt="">
+  <h1>Mini Minecraft 2D</h1>
+  <p>Ande, pule e quebre blocos.</p>
+  <small>Teste dos assets feitos no Blender.<br>Teclado: ← → ou A D, espaço pula, E quebra.</small>
+  <button id="play">JOGAR</button>
+</div></div>
+<div id="inv"></div>
+<div id="l" class="c l">◀</div><div id="r" class="c r">▶</div>
+<div id="j" class="c j">⬆</div><div id="b" class="c b">QUEBRAR</div>
+<script>
+const c = document.getElementById('g'), x = c.getContext('2d');
+let W, H, dpr;
+function z() {
+  dpr = Math.min(devicePixelRatio || 1, 3);
+  W = innerWidth; H = innerHeight;
+  c.width = W * dpr; c.height = H * dpr;
+}
+onresize = z; z();
+
+// ---------- assets
+const BLOCOS = ['grama', 'terra', 'pedra', 'minerio', 'madeira', 'folhas', 'areia'];
+const QUADROS = ['parado_0', 'parado_1', 'andar_0', 'andar_1', 'andar_2', 'andar_3', 'pulo', 'quebrar_0', 'quebrar_1'];
+const img = {};
+function carrega(nome, src) { const i = new Image(); i.src = src; img[nome] = i; }
+BLOCOS.forEach(b => carrega(b, `assets/blocos/${b}.png`));
+QUADROS.forEach(q => carrega(q, `assets/personagem/${q}.png`));
+['morros_longe', 'morros_perto', 'nuvem_0', 'nuvem_1', 'nuvem_2'].forEach(n => carrega(n, `assets/cenario/${n}.png`));
+
+// ---------- mundo
+const S = 32, C = 160, ROWS = 40;
+const a = Array.from({ length: ROWS }, () => Array(C).fill(0)); // 0 = ar, senão índice+1 em BLOCOS
+const B = n => BLOCOS.indexOf(n) + 1;
+let semente = 7; const rnd = () => (semente = (semente * 16807) % 2147483647) / 2147483647;
+const alturas = [];
+for (let i = 0; i < C; i++) {
+  const h = 20 + Math.round(Math.sin(i * .25) * 3 + Math.sin(i * .07 + 1) * 2);
+  alturas.push(h);
+  const praia = h >= 23;
+  for (let j = h; j < ROWS; j++) {
+    const d = j - h;
+    let t = d === 0 ? (praia ? 'areia' : 'grama') : d < 4 ? (praia && d < 2 ? 'areia' : 'terra') : 'pedra';
+    if (t === 'pedra' && rnd() < .07) t = 'minerio';
+    a[j][i] = B(t);
+  }
+}
+// árvores
+for (let i = 4; i < C - 4; i++) {
+  const h = alturas[i];
+  if (a[h][i] !== B('grama') || rnd() > .09) continue;
+  const alt = 3 + Math.floor(rnd() * 2);
+  for (let k = 1; k <= alt; k++) a[h - k][i] = B('madeira');
+  for (let dy = -alt - 2; dy <= -alt + 0; dy++)
+    for (let dx = -2; dx <= 2; dx++) {
+      if (Math.abs(dx) === 2 && (dy === -alt - 2 || dy === -alt)) continue;
+      const yy = h + dy, xx = i + dx;
+      if (!a[yy][xx]) a[yy][xx] = B('folhas');
+    }
+  i += 5;
+}
+const nuvens = Array.from({ length: 7 }, (_, k) => ({ x: rnd() * C * S, y: 30 + rnd() * 150, v: 6 + rnd() * 10, q: k % 3, s: .55 + rnd() * .5 }));
+
+// ---------- jogador
+let p = { x: 80, y: (alturas[2] - 3) * S, vx: 0, vy: 0, w: 24, h: 38, g: 0, dir: 1, t: 0, golpe: 0 };
+let L = 0, R = 0, run = 0, ultimo = 0;
+const inv = {};
+function solid(px, py, w, h) {
+  const l = Math.floor(px / S), r = Math.floor((px + w - 1) / S), t = Math.floor(py / S), b = Math.floor((py + h - 1) / S);
+  for (let yy = t; yy <= b; yy++) for (let xx = l; xx <= r; xx++)
+    if (yy >= ROWS || xx < 0 || xx >= C || (yy >= 0 && a[yy][xx] && a[yy][xx] !== B('folhas'))) return 1;
+  return 0;
+}
+function jump() { if (p.g) p.vy = -380 }
+function br() {
+  p.golpe = .25;
+  const cx = p.x + p.w / 2 + p.dir * (p.w / 2 + 10);
+  for (const oy of [20, 5, 34, -10]) {
+    const tx = Math.floor(cx / S), ty = Math.floor((p.y + oy) / S);
+    if (tx >= 0 && tx < C && ty >= 0 && ty < ROWS && a[ty][tx]) {
+      const nome = BLOCOS[a[ty][tx] - 1];
+      inv[nome] = (inv[nome] || 0) + 1;
+      a[ty][tx] = 0; desenhaInv(); return;
+    }
+  }
+}
+function desenhaInv() {
+  document.getElementById('inv').innerHTML = BLOCOS.filter(b => inv[b]).map(b =>
+    `<div class="slot" title="${b}"><img src="assets/icones/${b}.png" alt="${b}"><span>${inv[b]}</span></div>`).join('');
+}
+
+function quadro() {
+  if (p.golpe > 0) return p.golpe > .12 ? 'quebrar_0' : 'quebrar_1';
+  if (!p.g) return 'pulo';
+  if (Math.abs(p.vx) > 20) return 'andar_' + (Math.floor(p.t * 10) % 4);
+  return 'parado_' + (Math.floor(p.t * 2) % 2);
+}
+
+function step(agora) {
+  if (!run) return;
+  const dt = Math.min(.033, (agora - (ultimo || agora)) / 1000 || .016); ultimo = agora;
+  p.t += dt; p.golpe = Math.max(0, p.golpe - dt);
+  p.vx = L ? -150 : R ? 150 : p.vx * .7;
+  if (L) p.dir = -1; if (R) p.dir = 1;
+  p.vy = Math.min(p.vy + 850 * dt, 700);
+  const nx = p.x + p.vx * dt; if (!solid(nx, p.y, p.w, p.h)) p.x = nx;
+  const ny = p.y + p.vy * dt; p.g = 0;
+  if (!solid(p.x, ny, p.w, p.h)) p.y = ny;
+  else {
+    if (p.vy > 0) { p.g = 1; const chaoY = Math.floor((ny + p.h) / S) * S - p.h; if (!solid(p.x, chaoY, p.w, p.h)) p.y = chaoY }
+    p.vy = 0;
+  }
+
+  const camX = Math.max(0, Math.min(C * S - W, p.x - W / 2));
+  const camY = Math.max(-200, Math.min(ROWS * S - H, p.y - H * .55));
+  x.setTransform(dpr, 0, 0, dpr, 0, 0);
+  x.imageSmoothingEnabled = true; x.imageSmoothingQuality = 'high';
+
+  // céu
+  const ceu = x.createLinearGradient(0, 0, 0, H);
+  ceu.addColorStop(0, '#5fb4f5'); ceu.addColorStop(1, '#b8e2ff');
+  x.fillStyle = ceu; x.fillRect(0, 0, W, H);
+  // nuvens
+  for (const n of nuvens) {
+    n.x += n.v * dt; const i = img['nuvem_' + n.q], w = 256 * n.s, h = 128 * n.s;
+    const vao = W + w * 2, sx = (((n.x - camX * .1) % vao) + vao) % vao - w;
+    x.drawImage(i, sx, n.y - camY * .05, w, h);
+  }
+  // morros em parallax (emendam na horizontal)
+  const chao = 20 * S - camY;
+  camada(img.morros_longe, .2, chao - 150, 600);
+  camada(img.morros_perto, .4, chao - 90, 520);
+  function camada(i, f, base, larg) {
+    const alt = larg / 4, ox = -((camX * f) % larg);
+    for (let xx = ox; xx < W; xx += larg) x.drawImage(i, xx, base - alt * .2, larg + 1, alt);
+    const topo = base + alt * .8 - 1, gr = x.createLinearGradient(0, topo, 0, topo + 260);
+    gr.addColorStop(0, f < .3 ? '#7fb8a6' : '#3d8a4a'); gr.addColorStop(1, f < .3 ? '#5e9688' : '#24552d');
+    x.fillStyle = gr; x.fillRect(0, topo, W, H);
+  }
+
+  // blocos
+  const c0 = Math.max(0, Math.floor(camX / S)), c1 = Math.min(C, Math.ceil((camX + W) / S) + 1);
+  const r0 = Math.max(0, Math.floor(camY / S)), r1 = Math.min(ROWS, Math.ceil((camY + H) / S) + 1);
+  for (let yy = r0; yy < r1; yy++) for (let xx = c0; xx < c1; xx++) {
+    const v = a[yy][xx]; if (!v) continue;
+    x.drawImage(img[BLOCOS[v - 1]], Math.round(xx * S - camX), Math.round(yy * S - camY), S, S);
+  }
+  // jogador (sprite 4x do hitbox; espelha quando vai para a esquerda)
+  const spr = img[quadro()], px = Math.round(p.x - camX), py = Math.round(p.y - camY);
+  x.save();
+  if (p.dir < 0) { x.translate(px + p.w, py); x.scale(-1, 1); x.drawImage(spr, 0, 0, p.w, p.h) }
+  else x.drawImage(spr, px, py, p.w, p.h);
+  x.restore();
+  requestAnimationFrame(step);
+}
+
+// ---------- controles
+function hold(id, set) {
+  const e = document.getElementById(id);
+  e.onpointerdown = q => { q.preventDefault(); set(1) };
+  e.onpointerup = e.onpointercancel = e.onpointerleave = () => set(0);
+}
+hold('l', v => L = v); hold('r', v => R = v);
+document.getElementById('j').onpointerdown = e => { e.preventDefault(); jump() };
+document.getElementById('b').onpointerdown = e => { e.preventDefault(); br() };
+const tecla = (e, v) => {
+  const k = e.key.toLowerCase();
+  if (k === 'arrowleft' || k === 'a') L = v;
+  else if (k === 'arrowright' || k === 'd') R = v;
+  else if (v && (k === ' ' || k === 'arrowup' || k === 'w')) jump();
+  else if (v && k === 'e') br();
+  else return;
+  e.preventDefault();
+};
+onkeydown = e => tecla(e, 1); onkeyup = e => tecla(e, 0);
+document.getElementById('play').onclick = () => {
+  document.getElementById('m').style.display = 'none';
+  document.getElementById('inv').style.display = 'flex';
+  document.querySelectorAll('.c').forEach(e => e.style.display = 'flex');
+  run = 1; requestAnimationFrame(step);
+};
+</script>
+</body>
+</html>
